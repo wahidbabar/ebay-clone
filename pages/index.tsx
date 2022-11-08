@@ -6,8 +6,11 @@ import {
 import Header from "../components/Header/Header";
 import { BanknotesIcon, ClockIcon } from "@heroicons/react/24/outline";
 import { ListingType } from "@thirdweb-dev/sdk";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Home = () => {
+  const router = useRouter();
   const { contract } = useContract(
     process.env.NEXT_PUBLIC_MARKETPLACE_CONTRACT,
     "marketplace"
@@ -15,7 +18,6 @@ const Home = () => {
 
   const { data: listings, isLoading: loadingListings } =
     useActiveListings(contract);
-
 
   return (
     <div>
@@ -30,8 +32,9 @@ const Home = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mx-auto">
             {listings?.map((listing) => (
               <div
-                className="flex flex-col card hover:scale-105 transition-all duration-150 ease-out"
+                onClick={() => router.push(`/listing/${listing.id}`)}
                 key={listing.id}
+                className="flex flex-col card hover:scale-105 transition-all duration-150 ease-out"
               >
                 <div className="flex flex-1 flex-col pb-2 items-center">
                   <MediaRenderer className="w-44" src={listing.asset.image} />

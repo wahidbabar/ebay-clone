@@ -15,7 +15,7 @@ function Header({}: Props) {
   const address = useAddress();
 
   return (
-    <div className="max-w-6xl mx-auto p-2">
+    <div className="max-w-6xl mx-auto p-2 md:space-y-2 lg:space-y-4">
       <nav className="flex justify-between">
         <div className="flex items-center space-x-2 text-sm">
           {address ? (
